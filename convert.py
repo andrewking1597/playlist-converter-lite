@@ -5,26 +5,27 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
 def convert(pl_id, am_key, am_kid, am_team_id, sp_user_id, sp_username):
-	#todo Take sp_user_id as a param and use that to figure out sp_username so we don't require both params 
+	#todo take sp_user_id as a param and use that to figure out sp_username so we don't require both params 
 
-	# Get apple music playlist
+	# Get Apple Music playlist
 	am_pl_object = get_am_playlist(am_key, am_kid, am_team_id, pl_id)
-	# get tracklist from playlist
+
+	# Get tracklist from playlist object
 	am_tracklist = get_am_tracklist(am_pl_object)
 
 	# Create spotipy object
 	sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope='playlist-modify-public', username=sp_username))
-	# Create spotify playlist
+	# Create playlist
 	new_playlist = sp.user_playlist_create(user=sp_username, name='Converted Playlist')
 	new_playlist_id = new_playlist['id']
 
 	# Get spotify track IDs (and list of any non-matching titles) from tracklist
 	sp_track_ids, non_matches = get_sp_ids(am_tracklist, sp)
-	
-	# Add tracks to playlist
+
+	# Add songs by IDs
 	sp.playlist_add_items(new_playlist_id, sp_track_ids)
 
-	# Return link to playlist
+	# Return link to spotify playlist
 	return new_playlist['external_urls']['spotify']
 
 
@@ -35,6 +36,9 @@ def get_am_playlist(am_key, am_kid, am_team_id, pl_id):
 
 
 def get_am_tracklist(playlist):
+	"""
+	Get a list of tracks from a playlist object as returned by get_am_playlist()
+	"""
 
 	tracks = []
 
@@ -54,7 +58,7 @@ def get_am_tracklist(playlist):
 		# remove double spaces
 		title_artist_string = re.sub(r'\s\s+', ' ', title_artist_string)
 		tracks.append(title_artist_string)
-		
+
 	return tracks
 
 def get_sp_ids(tracks, sp):
