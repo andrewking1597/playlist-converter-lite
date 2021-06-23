@@ -1,13 +1,18 @@
 # playlist-converter-lite
 Convert an Apple Music playlist to a Spotify playlist
 
-# Prerequisites
+## Prerequisites
 To use playlist-converter-lite, you must meet the following criteria:
 - You have an Apple Developer account and a MusicKit API key.  [(More info)](https://developer.apple.com/documentation/applemusicapi/getting_keys_and_creating_tokens)
 - You have a Spotify for Developers account and your app is properly registered.  [(More info)](https://developer.spotify.com/documentation/web-api/quick-start/)
 
-# Quick Start
-## Set Environment Variables
+## Getting Started
+### Installation
+```zsh
+pip install playlistconverterlite
+```
+
+### Set Environment Variables
 Set your app's Spotify Client ID and Client Secret as SPOTIPY_CLIENT_ID and SPOTIPY_CLIENT_SECRET environment variables.
 
 On Mac:
@@ -25,7 +30,7 @@ export SPOTIPY_REDIRECT_URI=http://127.0.0.1:8080/
 
 Also be sure to register the redirect URI in your app's settings on your Spotify Developer dashboard.
 
-## Convert
+### Convert
 ```python
 import playlistconverterlite as converter
 
@@ -37,3 +42,6 @@ new_playlist_link = converter.convert(
     sp_username="SPOTIFY_UN"
 )
 ```
+
+## License
+https://github.com/andrewking1597/playlist-converter-lite/blob/main/LICENSE
