@@ -32,7 +32,7 @@ Also be sure to register the redirect URI in your app's settings on your Spotify
 
 ### Convert
 ```python
-import playlistconverterlite as converter
+from playlistconverterlite import converter
 
 new_playlist_link = converter.convert(
     pl_id="SOME_PLAYLIST",
