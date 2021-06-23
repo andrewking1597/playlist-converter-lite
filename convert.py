@@ -20,12 +20,12 @@ def convert(pl_id, am_key, am_kid, am_team_id, sp_user_id, sp_username):
 
 	# Get spotify track IDs (and list of any non-matching titles) from tracklist
 	sp_track_ids, non_matches = get_sp_ids(am_tracklist, sp)
-  
-  # Add tracks to playlist
+	
+	# Add tracks to playlist
 	sp.playlist_add_items(new_playlist_id, sp_track_ids)
 
 	# Return link to playlist
-  return new_playlist['external_urls']['spotify']
+	return new_playlist['external_urls']['spotify']
 
 
 def get_am_playlist(am_key, am_kid, am_team_id, pl_id):
@@ -54,7 +54,7 @@ def get_am_tracklist(playlist):
 		# remove double spaces
 		title_artist_string = re.sub(r'\s\s+', ' ', title_artist_string)
 		tracks.append(title_artist_string)
-
+		
 	return tracks
 
 def get_sp_ids(tracks, sp):
