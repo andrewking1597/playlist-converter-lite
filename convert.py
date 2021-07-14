@@ -4,11 +4,13 @@ import re
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
-def convert(pl_id, am_key, am_kid, am_team_id, sp_user_id, sp_username):
-	#todo take sp_user_id as a param and use that to figure out sp_username so we don't require both params 
+def convert(pl_id, am_key, am_kid, am_team_id, sp_username):
 
 	# Get Apple Music playlist
 	am_pl_object = get_am_playlist(am_key, am_kid, am_team_id, pl_id)
+
+	# Get playlist name
+	playlist_name = am_pl_object["data"][0]["attributes"]["name"]
 
 	# Get tracklist from playlist object
 	am_tracklist = get_am_tracklist(am_pl_object)
@@ -16,7 +18,7 @@ def convert(pl_id, am_key, am_kid, am_team_id, sp_user_id, sp_username):
 	# Create spotipy object
 	sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope='playlist-modify-public', username=sp_username))
 	# Create playlist
-	new_playlist = sp.user_playlist_create(user=sp_username, name='Converted Playlist')
+	new_playlist = sp.user_playlist_create(user=sp_username, name=playlist_name)
 	new_playlist_id = new_playlist['id']
 
 	# Get spotify track IDs (and list of any non-matching titles) from tracklist
@@ -81,4 +83,3 @@ def get_sp_ids(tracks, sp):
 			no_matches.append(track)
 
 	return track_ids, no_matches
-
