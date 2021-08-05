@@ -17,7 +17,7 @@ Set your app's Spotify Client ID and Client Secret as SPOTIPY_CLIENT_ID and SPOT
 
 ```zsh
 export SPOTIPY_CLIENT_ID=<your_client_id>
-export SPOTIPY_CLIENT_SECRET=<you_client_secret>
+export SPOTIPY_CLIENT_SECRET=<your_client_secret>
 ```
 
 You will also need to set an environment variable SPOTIPY_REDIRECT_URI, which tells the Spotify API where to redirect the user once they have successfully entered their login info.
