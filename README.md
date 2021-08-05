@@ -16,8 +16,8 @@ pip install playlistconverterlite
 Set your app's Spotify Client ID and Client Secret as SPOTIPY_CLIENT_ID and SPOTIPY_CLIENT_SECRET environment variables.
 
 ```zsh
-export SPOTIPY_CLIENT_ID=394jsd32jdj887377d783827dduw
-export SPOTIPY_CLIENT_SECRET=60sjejjww998w8777399f9ds99
+export SPOTIPY_CLIENT_ID=<your_client_id>
+export SPOTIPY_CLIENT_SECRET=<you_client_secret>
 ```
 
 You will also need to set an environment variable SPOTIPY_REDIRECT_URI, which tells the Spotify API where to redirect the user once they have successfully entered their login info.
